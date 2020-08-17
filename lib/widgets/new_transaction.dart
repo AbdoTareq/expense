@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
 
-class NewTransaction extends StatelessWidget {
-  final titleEditController = TextEditingController();
-  final amountEditController = TextEditingController();
+//*make this class stateful even we won't use setstate() as input fields were cleared */
+class NewTransaction extends StatefulWidget {
   final Function addNewTransaction;
 
   NewTransaction({@required this.addNewTransaction});
+
+  @override
+  _NewTransactionState createState() => _NewTransactionState();
+}
+
+class _NewTransactionState extends State<NewTransaction> {
+  final titleEditController = TextEditingController();
+
+  final amountEditController = TextEditingController();
 
   submitData() {
     final title = titleEditController.text;
@@ -13,7 +21,8 @@ class NewTransaction extends StatelessWidget {
     if (title.isEmpty || amount <= 0) {
       return;
     }
-    addNewTransaction(title, amount);
+    widget.addNewTransaction(title, amount);
+    Navigator.of(context).pop();
   }
 
   @override
