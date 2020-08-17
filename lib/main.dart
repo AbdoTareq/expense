@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_complete_guide/widgets/transaction_list.dart';
+import 'package:flutter_complete_guide/widgets/user_transactions.dart';
 import 'models/transaction.dart';
 import 'package:intl/intl.dart';
 
@@ -19,11 +21,6 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatelessWidget {
-  final List<Transaction> transactions = [
-    Transaction(id: 't1', title: 'New shoes', amount: 66, date: DateTime.now()),
-    Transaction(id: 't2', title: 'New Bag', amount: 55, date: DateTime.now()),
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,44 +38,7 @@ class MyHomePage extends StatelessWidget {
               elevation: 5,
             ),
           ),
-          NewTransaction(),
-          Column(
-            children: transactions.map((tx) {
-              return Card(
-                child: Row(
-                  children: [
-                    Container(
-                      child: Text(
-                        '\$${tx.amount}',
-                        style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.purple),
-                      ),
-                      padding: EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                          border: Border.all(width: 2, color: Colors.purple)),
-                      margin: EdgeInsets.all(10),
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          tx.title,
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 18),
-                        ),
-                        Text(
-                          DateFormat.yMMMMd().format(tx.date),
-                          style: TextStyle(color: Colors.grey),
-                        ),
-                      ],
-                    )
-                  ],
-                ),
-              );
-            }).toList(),
-          ),
+          UserTransactions(),
         ],
       ),
     );
