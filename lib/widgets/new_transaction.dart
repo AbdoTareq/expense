@@ -9,29 +9,31 @@ class NewTransaction extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: Container(
-        padding: EdgeInsets.all(10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            TextField(
-              controller: titleEditController,
-              decoration: InputDecoration(labelText: 'Title'),
-            ),
-            TextField(
-              controller: amountEditController,
-              decoration: InputDecoration(labelText: 'Amount'),
-            ),
-            FlatButton(
-              onPressed: () {
-                addNewTransaction(titleEditController.text,
-                    double.parse(amountEditController.text));
-              },
-              textColor: Colors.purple,
-              child: Text('Add transaction'),
-            ),
-          ],
+    return SingleChildScrollView(
+      child: Card(
+        child: Container(
+          padding: EdgeInsets.all(10),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              TextField(
+                controller: titleEditController,
+                decoration: InputDecoration(labelText: 'Title'),
+              ),
+              TextField(
+                controller: amountEditController,
+                decoration: InputDecoration(labelText: 'Amount'),
+              ),
+              FlatButton(
+                onPressed: () {
+                  addNewTransaction(titleEditController.text,
+                      double.parse(amountEditController.text));
+                },
+                textColor: Colors.purple,
+                child: Text('Add transaction'),
+              ),
+            ],
+          ),
         ),
       ),
     );
