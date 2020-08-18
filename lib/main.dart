@@ -18,12 +18,18 @@ class MyApp extends StatelessWidget {
           accentColor: Colors.amber,
           textTheme: ThemeData.light().textTheme.copyWith(
                 // title => headline6
-                headline6: TextStyle(fontFamily: 'OpenSans', fontSize: 18),
+                headline6: TextStyle(
+                    fontFamily: 'OpenSans',
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold),
               ),
           appBarTheme: AppBarTheme(
             textTheme: ThemeData.light().textTheme.copyWith(
                   // title => headline6
-                  headline6: TextStyle(fontFamily: 'OpenSans', fontSize: 20),
+                  headline6: TextStyle(
+                      fontFamily: 'OpenSans',
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold),
                 ),
           )),
       home: MyHomePage(),
@@ -37,10 +43,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final List<Transaction> transactions = [
-    Transaction(id: 't1', title: 'New shoes', amount: 66, date: DateTime.now()),
-    Transaction(id: 't2', title: 'New Bag', amount: 55, date: DateTime.now()),
-  ];
+  final List<Transaction> transactions = [];
 
   _addNewTransaction(String title, double amount) {
     setState(() {
