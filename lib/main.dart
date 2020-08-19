@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_complete_guide/widgets/chart.dart';
 import 'package:flutter_complete_guide/widgets/transaction_list.dart';
 
 import 'models/transaction.dart';
@@ -45,6 +46,14 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   final List<Transaction> transactions = [];
 
+  // this method is to get the last 7 days transactions through filtering by where keyword
+  List<Transaction> get _recentTransactions {
+    return transactions.where((transaction) {
+      return transaction.date
+          .isAfter(DateTime.now().subtract(Duration(days: 7)));
+    }).toList();
+  }
+
   _addNewTransaction(String title, double amount) {
     setState(() {
       transactions.add(Transaction(
@@ -81,10 +90,8 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             Container(
               width: double.infinity,
-              child: Card(
-                color: Colors.blue,
-                child: Text('CHART!'),
-                elevation: 5,
+              child: Chart(
+                recentTransactions: _recentTransactions,
               ),
             ),
             TransactionList(
