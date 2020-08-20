@@ -64,6 +64,12 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  _deleteTransaction(String id) {
+    setState(() {
+      transactions.removeWhere((element) => element.id == id);
+    });
+  }
+
   _startAddNewTransaction(BuildContext context) {
     return showModalBottomSheet(
         context: context,
@@ -96,6 +102,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             TransactionList(
               transactions: transactions,
+              deleteTransaction: _deleteTransaction,
             ),
           ],
         ),
