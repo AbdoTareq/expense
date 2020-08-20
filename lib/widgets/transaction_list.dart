@@ -12,68 +12,65 @@ class TransactionList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 450,
-      child: transactions.isNotEmpty
-          ? ListView.builder(
-              itemCount: transactions.length,
-              itemBuilder: (context, index) => Card(
-                  elevation: 5,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: ListTile(
-                      leading: CircleAvatar(
-                        child: FittedBox(
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                              '\$${transactions[index].amount.toStringAsFixed(2)}',
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                              ),
+    return transactions.isNotEmpty
+        ? ListView.builder(
+            itemCount: transactions.length,
+            itemBuilder: (context, index) => Card(
+                elevation: 5,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ListTile(
+                    leading: CircleAvatar(
+                      child: FittedBox(
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            '\$${transactions[index].amount.toStringAsFixed(2)}',
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
                         ),
-                        radius: 30,
                       ),
-                      title: Text(
-                        transactions[index].title,
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 18),
-                      ),
-                      subtitle: Text(
-                        DateFormat.yMMMMd().format(transactions[index].date),
-                        style: TextStyle(color: Colors.grey),
-                      ),
-                      trailing: IconButton(
-                        icon: Icon(
-                          Icons.delete,
-                          color: Theme.of(context).errorColor,
-                        ),
-                        onPressed: () =>
-                            deleteTransaction(transactions[index].id),
-                      ),
+                      radius: 30,
                     ),
-                  )))
-          : Column(
-              children: [
-                Text(
-                  'No transactions Yet!',
-                  style: Theme.of(context).textTheme.headline6,
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Container(
-                  height: 200,
-                  child: Image.asset(
-                    'assets/images/waiting.png',
-                    fit: BoxFit.cover,
+                    title: Text(
+                      transactions[index].title,
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                    ),
+                    subtitle: Text(
+                      DateFormat.yMMMMd().format(transactions[index].date),
+                      style: TextStyle(color: Colors.grey),
+                    ),
+                    trailing: IconButton(
+                      icon: Icon(
+                        Icons.delete,
+                        color: Theme.of(context).errorColor,
+                      ),
+                      onPressed: () =>
+                          deleteTransaction(transactions[index].id),
+                    ),
                   ),
-                )
-              ],
-            ),
-    );
+                )))
+        : Column(
+            children: [
+              Text(
+                'No transactions Yet!',
+                style: Theme.of(context).textTheme.headline6,
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Container(
+                height: 200,
+                child: Image.asset(
+                  'assets/images/waiting.png',
+                  fit: BoxFit.cover,
+                ),
+              )
+            ],
+          );
   }
 }

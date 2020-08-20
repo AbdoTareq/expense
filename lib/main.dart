@@ -44,11 +44,20 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final List<Transaction> transactions = [];
+  final List<Transaction> userTransactions = [
+    Transaction(title: "Phone", amount: 70, date: DateTime.now()),
+    Transaction(title: "Nj", amount: 70, date: DateTime.now()),
+    Transaction(title: "Ad", amount: 40, date: DateTime.now()),
+    Transaction(title: "Ad", amount: 40, date: DateTime.now()),
+    Transaction(title: "Ad", amount: 40, date: DateTime.now()),
+    Transaction(title: "Ad", amount: 40, date: DateTime.now()),
+    Transaction(title: "468", amount: 40, date: DateTime.now()),
+    Transaction(title: "adad", amount: 20, date: DateTime.now())
+  ];
 
   // this method is to get the last 7 days transactions through filtering by where keyword
   List<Transaction> get _recentTransactions {
-    return transactions.where((transaction) {
+    return userTransactions.where((transaction) {
       return transaction.date
           .isAfter(DateTime.now().subtract(Duration(days: 7)));
     }).toList();
@@ -56,7 +65,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   _addNewTransaction(String title, double amount, DateTime date) {
     setState(() {
-      transactions.add(Transaction(
+      userTransactions.add(Transaction(
           title: title,
           amount: amount,
           id: DateTime.now().toString(),
@@ -66,7 +75,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   _deleteTransaction(String id) {
     setState(() {
-      transactions.removeWhere((element) => element.id == id);
+      userTransactions.removeWhere((element) => element.id == id);
     });
   }
 
@@ -80,29 +89,39 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final appBar = AppBar(
+      title: Text('Personal Expense'),
+      actions: [
+        IconButton(
+          icon: Icon(Icons.add),
+          onPressed: () => _startAddNewTransaction(context),
+        )
+      ],
+    );
+
+    final deviceSize = MediaQuery.of(context).size.height -
+        appBar.preferredSize.height -
+        // this is status bar height
+        MediaQuery.of(context).padding.top;
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Personal Expense'),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.add),
-            onPressed: () => _startAddNewTransaction(context),
-          )
-        ],
-      ),
+      appBar: appBar,
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Container(
+              height: deviceSize * .3,
               width: double.infinity,
               child: Chart(
                 recentTransactions: _recentTransactions,
               ),
             ),
-            TransactionList(
-              transactions: transactions,
-              deleteTransaction: _deleteTransaction,
+            Container(
+              height: deviceSize * .7,
+              child: TransactionList(
+                transactions: userTransactions,
+                deleteTransaction: _deleteTransaction,
+              ),
             ),
           ],
         ),
