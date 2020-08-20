@@ -45,15 +45,17 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final List<Transaction> userTransactions = [
-    Transaction(title: "Phone", amount: 70, date: DateTime.now()),
-    Transaction(title: "Nj", amount: 70, date: DateTime.now()),
-    Transaction(title: "Ad", amount: 40, date: DateTime.now()),
-    Transaction(title: "Ad", amount: 40, date: DateTime.now()),
-    Transaction(title: "Ad", amount: 40, date: DateTime.now()),
-    Transaction(title: "Ad", amount: 40, date: DateTime.now()),
-    Transaction(title: "468", amount: 40, date: DateTime.now()),
-    Transaction(title: "adad", amount: 20, date: DateTime.now())
+//    Transaction(title: "Phone", amount: 70, date: DateTime.now()),
+//    Transaction(title: "Nj", amount: 70, date: DateTime.now()),
+//    Transaction(title: "Ad", amount: 40, date: DateTime.now()),
+//    Transaction(title: "Ad", amount: 40, date: DateTime.now()),
+//    Transaction(title: "Ad", amount: 40, date: DateTime.now()),
+//    Transaction(title: "Ad", amount: 40, date: DateTime.now()),
+//    Transaction(title: "468", amount: 40, date: DateTime.now()),
+//    Transaction(title: "adad", amount: 20, date: DateTime.now())
   ];
+
+  bool _showChart = false;
 
   // this method is to get the last 7 days transactions through filtering by where keyword
   List<Transaction> get _recentTransactions {
@@ -89,6 +91,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final mediaQuery = MediaQuery.of(context);
+    final isLandScape = mediaQuery.orientation == Orientation.landscape;
     final appBar = AppBar(
       title: Text('Personal Expense'),
       actions: [
@@ -98,31 +102,54 @@ class _MyHomePageState extends State<MyHomePage> {
         )
       ],
     );
-
-    final deviceSize = MediaQuery.of(context).size.height -
+    final deviceSize = mediaQuery.size.height -
         appBar.preferredSize.height -
         // this is status bar height
-        MediaQuery.of(context).padding.top;
+        mediaQuery.padding.top;
+    final txListWidget = Container(
+      height: deviceSize * .7,
+      child: TransactionList(
+        transactions: userTransactions,
+        deleteTransaction: _deleteTransaction,
+      ),
+    );
     return Scaffold(
       appBar: appBar,
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Container(
-              height: deviceSize * .3,
-              width: double.infinity,
-              child: Chart(
-                recentTransactions: _recentTransactions,
+            if (isLandScape)
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text('Show chart'),
+                  Switch(
+                      value: _showChart,
+                      onChanged: (value) {
+                        setState(() {
+                          _showChart = value;
+                        });
+                      }),
+                ],
               ),
-            ),
-            Container(
-              height: deviceSize * .7,
-              child: TransactionList(
-                transactions: userTransactions,
-                deleteTransaction: _deleteTransaction,
+            if (!isLandScape)
+              Container(
+                height: deviceSize * .3,
+                child: Chart(
+                  recentTransactions: _recentTransactions,
+                ),
               ),
-            ),
+            if (!isLandScape) txListWidget,
+            if (isLandScape)
+              _showChart
+                  ? Container(
+                      height: deviceSize * .7,
+                      child: Chart(
+                        recentTransactions: _recentTransactions,
+                      ),
+                    )
+                  : txListWidget,
           ],
         ),
       ),
