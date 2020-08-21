@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
           // errorColor: Colors.red,
           fontFamily: 'Quicksand',
           textTheme: ThemeData.light().textTheme.copyWith(
-                title: TextStyle(
+                headline6: TextStyle(
                   fontFamily: 'OpenSans',
                   fontWeight: FontWeight.bold,
                   fontSize: 18,
@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
               ),
           appBarTheme: AppBarTheme(
             textTheme: ThemeData.light().textTheme.copyWith(
-                  title: TextStyle(
+                  headline6: TextStyle(
                     fontFamily: 'OpenSans',
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
@@ -57,66 +57,66 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final List<Transaction> _userTransactions = [
-    Transaction(
-        id: DateTime.now().subtract(Duration(days: 1)).toString(),
-        title: "Phone",
-        amount: 70,
-        date: DateTime.now()),
-    Transaction(
-        id: DateTime.now().subtract(Duration(days: 77)).toString(),
-        title: "Phone",
-        amount: 70,
-        date: DateTime.now()),
-    Transaction(
-        id: DateTime.now().subtract(Duration(days: 49)).toString(),
-        title: "Phone",
-        amount: 70,
-        date: DateTime.now()),
-    Transaction(
-        id: DateTime.now().subtract(Duration(days: 29)).toString(),
-        title: "Phone",
-        amount: 70,
-        date: DateTime.now()),
-    Transaction(
-        id: DateTime.now().subtract(Duration(days: 19)).toString(),
-        title: "Phonez",
-        amount: 70,
-        date: DateTime.now()),
-    Transaction(
-        id: DateTime.now().subtract(Duration(days: 8)).toString(),
-        title: "Phonsde",
-        amount: 70,
-        date: DateTime.now()),
-    Transaction(
-        id: DateTime.now().subtract(Duration(days: 6)).toString(),
-        title: "Phonsfe",
-        amount: 70,
-        date: DateTime.now()),
-    Transaction(
-        id: DateTime.now().subtract(Duration(days: 5)).toString(),
-        title: "Phone",
-        amount: 70,
-        date: DateTime.now()),
-    Transaction(
-        id: DateTime.now().subtract(Duration(days: 2)).toString(),
-        title: "Phondge",
-        amount: 70,
-        date: DateTime.now()),
-    Transaction(
-        id: DateTime.now().subtract(Duration(days: 43)).toString(),
-        title: "as",
-        amount: 70,
-        date: DateTime.now()),
-    Transaction(
-        id: DateTime.now().subtract(Duration(days: 36)).toString(),
-        title: "aqe",
-        amount: 70,
-        date: DateTime.now()),
-    Transaction(
-        id: DateTime.now().subtract(Duration(days: 37)).toString(),
-        title: "acv",
-        amount: 70,
-        date: DateTime.now()),
+//    Transaction(
+//        id: DateTime.now().subtract(Duration(days: 1)).toString(),
+//        title: "Phone",
+//        amount: 70,
+//        date: DateTime.now()),
+//    Transaction(
+//        id: DateTime.now().subtract(Duration(days: 77)).toString(),
+//        title: "Phone",
+//        amount: 70,
+//        date: DateTime.now()),
+//    Transaction(
+//        id: DateTime.now().subtract(Duration(days: 49)).toString(),
+//        title: "Phone",
+//        amount: 70,
+//        date: DateTime.now()),
+//    Transaction(
+//        id: DateTime.now().subtract(Duration(days: 29)).toString(),
+//        title: "Phone",
+//        amount: 70,
+//        date: DateTime.now()),
+//    Transaction(
+//        id: DateTime.now().subtract(Duration(days: 19)).toString(),
+//        title: "Phonez",
+//        amount: 70,
+//        date: DateTime.now()),
+//    Transaction(
+//        id: DateTime.now().subtract(Duration(days: 8)).toString(),
+//        title: "Phonsde",
+//        amount: 70,
+//        date: DateTime.now()),
+//    Transaction(
+//        id: DateTime.now().subtract(Duration(days: 6)).toString(),
+//        title: "Phonsfe",
+//        amount: 70,
+//        date: DateTime.now()),
+//    Transaction(
+//        id: DateTime.now().subtract(Duration(days: 5)).toString(),
+//        title: "Phone",
+//        amount: 70,
+//        date: DateTime.now()),
+//    Transaction(
+//        id: DateTime.now().subtract(Duration(days: 2)).toString(),
+//        title: "Phondge",
+//        amount: 70,
+//        date: DateTime.now()),
+//    Transaction(
+//        id: DateTime.now().subtract(Duration(days: 43)).toString(),
+//        title: "as",
+//        amount: 70,
+//        date: DateTime.now()),
+//    Transaction(
+//        id: DateTime.now().subtract(Duration(days: 36)).toString(),
+//        title: "aqe",
+//        amount: 70,
+//        date: DateTime.now()),
+//    Transaction(
+//        id: DateTime.now().subtract(Duration(days: 37)).toString(),
+//        title: "acv",
+//        amount: 70,
+//        date: DateTime.now()),
   ];
   bool _showChart = false;
 
@@ -214,7 +214,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 children: <Widget>[
                   Text(
                     'Show Chart',
-                    style: Theme.of(context).textTheme.title,
+                    style: Theme.of(context).textTheme.headline6,
                   ),
                   Switch.adaptive(
                     activeColor: Theme.of(context).accentColor,
