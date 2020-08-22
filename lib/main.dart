@@ -164,7 +164,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   List<Widget> _buildPortraitContent(
-      MediaQueryData mediaQuery, AppBar appBar, Widget txListWidget) {
+      MediaQueryData mediaQuery, var appBar, Widget txListWidget) {
     return [
       Container(
         height: (mediaQuery.size.height -
@@ -178,7 +178,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   List<Widget> _buildLandScapeContent(
-      MediaQueryData mediaQuery, AppBar appBar, Widget txListWidget) {
+      MediaQueryData mediaQuery, var appBar, Widget txListWidget) {
     return [
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
